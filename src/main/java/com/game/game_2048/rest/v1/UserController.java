@@ -17,13 +17,14 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/all")
-    public String findAll(){
+    public List<User> findAll(){
         List<User> users = userService.findAll();
-        String usersStr = "";
-        for (User user:
-                users) {
-            usersStr = usersStr + " " + user.getFirstName();
-        }
-        return usersStr;
+        return users;
+//        String usersStr = "";
+//        for (User user:
+//                users) {
+//            usersStr = usersStr + " " + user.getFirstName();
+//        }
+//        return usersStr;
     }
 }

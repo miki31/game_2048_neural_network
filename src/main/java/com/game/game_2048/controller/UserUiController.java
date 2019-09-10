@@ -24,6 +24,6 @@ public class UserUiController {
              users) {
             usersStr = usersStr + " " + user.getFirstName();
         }
-        return "home";
+        return "home1";
     }
 }
