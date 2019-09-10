@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class LoginController {
@@ -39,8 +40,9 @@ public class LoginController {
     @PostMapping(value = "/signup")
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = customUserDetailsService.findUserByEmail(user.getEmail()).get();
-        if (userExists != null) {
+        Optional<User> userExists = customUserDetailsService.findUserByEmail(user.getEmail());
+
+        if (userExists.isPresent()) {
             bindingResult
                     .rejectValue("email", "error.user",
                             "There is already a user registered with the username provided");
@@ -72,7 +74,7 @@ public class LoginController {
     @GetMapping(value = {"/","/home"})
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home1");
+        modelAndView.setViewName("home");
         return modelAndView;
     }
 }

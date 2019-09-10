@@ -20,8 +20,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
+//    @Autowired
+//    CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
 
     @Bean
     public UserDetailsService mongoUserDetails() {
@@ -62,7 +62,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/dashboard/**").hasAuthority("ADMIN").anyRequest()
-                .authenticated().and().csrf().disable().formLogin().successHandler(customizeAuthenticationSuccessHandler)
+//                .authenticated().and().csrf().disable().formLogin().successHandler(customizeAuthenticationSuccessHandler)
+
+                .authenticated()
+                .and()
+                .csrf().disable().
+                formLogin()
+
+
                 .loginPage("/login").failureUrl("/login?error=true")
                 .usernameParameter("email")
                 .passwordParameter("password")
